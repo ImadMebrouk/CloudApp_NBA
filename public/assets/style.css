@@ -1,5 +1,5 @@
 body{
-  padding-top:5px;
+  padding-top:0px;
 }
 
 .form_main {
@@ -14,18 +14,33 @@ body{
     text-transform: uppercase;
 }
 .heading {
-    border-bottom: 1px solid #fcab0e;
+    border-bottom: 0px solid #fcab0e;
     padding-bottom: 9px;
     position: relative;
 }
 .heading span {
-    background: #9e6600 none repeat scroll 0 0;
+    background: #e7e7e7 none repeat scroll 0 0;
     bottom: -2px;
     height: 3px;
     left: 0;
     position: absolute;
     width: 75px;
 }
+
+.navbar-default {
+    background-color: #1d428a;
+    border-color: #e7e7e7;
+
+}
+
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+
+.navbar-default .nav {
+    color: #fff;
+}
+
 .form {
     border-radius: 7px;
     padding: 6px;
