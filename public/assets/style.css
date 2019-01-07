@@ -41,6 +41,11 @@ body{
     color: #fff;
 }
 
+.nav-link{
+    color: #fff;
+}
+
+
 .form {
     border-radius: 7px;
     padding: 6px;
