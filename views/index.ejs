@@ -16,7 +16,7 @@
 
     <div class="navbar-header">
         <a class="navbar-brand" href="#">
-            <span class="glyphicon glyphicon glyphicon-tree-deciduous"></span>
+            <span> NBA - </span>
             NoSQL Application with NodeJS & MongoDB
         </a>
 
@@ -45,6 +45,23 @@
             </div>
             </div>
       </div>
+
+      <div class="col-md-4">
+      <div class="form_main">
+                  <h4 class="heading"><strong>NBA </strong> Search <span></span></h4>
+                  <div class="form">
+                  	<form action="/getMinutes" method="POST">
+                      <input type="text"  placeholder="TeamName" value="" name="TeamName2" class="txt">
+                      <br>
+                      <br>
+
+                      <input type="submit" value="submit" name="submit2" class="txt2">
+                  </form>
+              </div>
+              </div>
+        </div>
+
+
   </div>
 </div>
 
@@ -52,12 +69,25 @@
   <br>
 
   <ul class="Actions">
-  <% for(var i=0; i<Actions.length; i++) {%>
+  <% for(var i=0; i< Actions.length; i++) {%>
     <li class="list-group-item">
 
      <strong>  <span><%= Actions[i].TeamName %></span> </strong>
       <span>:</span>
       <span><%= Actions[i].PlayerName %></span>
+</span>
+
+    </li>
+  <% } %>
+  </ul>
+
+  <ul class="Actions">
+  <% for(var i=0; i< ActionsMin.length; i++) {%>
+    <li class="list-group-item">
+
+     <strong>  <span><%= ActionsMin[i].TeamName %></span> </strong>
+      <span>:</span>
+      <span><%= ActionsMin[i].Minutes %></span>
 </span>
 
     </li>
