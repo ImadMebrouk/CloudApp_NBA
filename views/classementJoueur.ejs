@@ -5,7 +5,8 @@
   <title>NBA</title>
 
   <!-- CSS (load bootstrap from a CDN) -->
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <link href= "/assets/style.css" rel="stylesheet" type="text/css" />
 
 </head>
@@ -31,8 +32,8 @@
 
 <div class="container">
   <div class="row">
-      
-      
+
+
     <div class="col-md-4">
     <div class="form_main">
                 <h4 class="heading"><strong>NBA </strong> Search <span></span></h4>
@@ -52,25 +53,40 @@
   </div>
 </div>
 
-    
-    
+
+
   <br>
   <br>
 
+  <div class="card">
+      <div class="card-body">
+                  <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane container active">
 
-<table>
+<table  id="compactTable" class="table">
+
+  <thead class="thead-light">
    <tr>
       <th>PlayerName</th><th>Points</th><th>Points/Game</th>
    </tr>
+   </thead>
 
+   <tbody>
    <% for (var i = 0; i < Players.length; i++) { %>
     <tr>
       <td><%= Players[i]._id %></td>
       <td><%= Players[i].Pts %></td>
       <td><%= Players[i].Pts/Players[i].count %></td>
-    </tr>    
+    </tr>
    <% } %>
+ </tbody>
 </table>
+
+</div>
+</div>
+</div>
+</div>
 
 
 
