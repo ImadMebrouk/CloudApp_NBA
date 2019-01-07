@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 app.get("/getMinutes", (req, res) => {
     //res.sendFile(__dirname + "/index.html");
     var result = []
-    res.render('index.ejs', {ActionsMin: result})
+    res.render('index.ejs', {Actions: result})
 });
 
 
@@ -49,7 +49,7 @@ app.post('/', (req, res) => {
     //{"title" : {'$regex': title, '$options': 'i'}, "type" : {'$regex': type, '$options': 'i'},"authors" : {'$regex': author, '$options': 'i'}};
 
 
-  db.collection('Actions').find(query).toArray((err, result) => {
+db.collection('Actions').find(query).toArray((err, result) => {
     if (err) return console.log(err)
     db.collection('Actions').find(query).count().then(numItems => {
       console.log(numItems);
@@ -60,15 +60,17 @@ app.post('/', (req, res) => {
 
 });
 
+
+
 app.post('/getMinutes', (req, res) => {
   var teamName = req.body.TeamName;
   var minutes = req.body.Minutes;
 
 
-    var query = {"TeamName" : teamName};
+    var query = {"TeamName" : "Los Angeles Lakers"};
 
 
-		console.log(query)
+	console.log(query)
     //{"title" : {'$regex': title, '$options': 'i'}, "type" : {'$regex': type, '$options': 'i'},"authors" : {'$regex': author, '$options': 'i'}};
 
 
@@ -77,7 +79,7 @@ app.post('/getMinutes', (req, res) => {
     db.collection('Actions').find(query).count().then(numItems => {
       console.log(numItems);
     })
-    res.render('index.ejs', {ActionsMin: result})
+    res.render('index.ejs', {Actions: result})
   //console.log(result);
   });
 
