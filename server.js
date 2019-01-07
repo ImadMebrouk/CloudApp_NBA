@@ -30,11 +30,57 @@ app.get("/", (req, res) => {
     res.render('index.ejs', {Actions: result})
 });
 
+
 app.get("/getMinutes", (req, res) => {
     //res.sendFile(__dirname + "/index.html");
     var result = []
     res.render('index.ejs', {Actions: result})
 });
+
+app.get("/classementJoueur", (req, res) => {
+    
+
+    var query =   
+      {
+        $group : {
+           _id : "$PlayerName",
+           Pts:{$sum:"$Points"},
+           count: { $sum: 1 }
+
+           // ... rajouter toutes les autres stats
+        }
+      };
+      
+    var sort =   {
+         Pts:-1
+      };
+      
+ 
+
+
+		console.log(query)
+    //{"title" : {'$regex': title, '$options': 'i'}, "type" : {'$regex': type, '$options': 'i'},"authors" : {'$regex': author, '$options': 'i'}};
+
+
+    db.collection('Actions').aggregate([{
+        $group : {
+           _id : "$PlayerName",
+           Pts:{$sum:"$Points"},
+           count: { $sum: 1 }
+
+           // ... rajouter toutes les autres stats
+        }
+      }]).sort(sort).toArray((err, result) => {
+    if (err) return console.log(err)
+    res.render('classementJoueur.ejs', {Players: result})
+  console.log(result);
+  });
+    
+});
+
+
+
+/* Post */
 
 
 app.post('/', (req, res) => {
@@ -62,12 +108,13 @@ db.collection('Actions').find(query).toArray((err, result) => {
 
 
 
+
 app.post('/getMinutes', (req, res) => {
   var teamName = req.body.TeamName;
   var minutes = req.body.Minutes;
 
 
-    var query = {"TeamName" : "Los Angeles Lakers"};
+    var query = {"TeamName" : teamName};
 
 
 	console.log(query)
