@@ -51,11 +51,27 @@
                   <h4 class="heading"><strong>NBA </strong> Search <span></span></h4>
                   <div class="form">
                   	<form action="/getMinutes" method="POST">
-                      <input type="text"  placeholder="TeamName" value="" name="TeamName2" class="txt">
+                      <input type="text"  placeholder="TeamName" value="" name="TeamName" class="txt">
                       <br>
                       <br>
 
-                      <input type="submit" value="submit" name="submit2" class="txt2">
+                        <ul class="Actions">
+  <% for(var i=0; i< Actions.length; i++) {%>
+    <li class="list-group-item">
+
+     <strong>  <span><%= Actions[i].TeamName %></span> </strong>
+      <span>:</span>
+      <span><%if (typeof Actions[i].Minutes !== 'undefined') { %>
+              Actions[i].Minutes
+<% } %>
+    
+</span>
+</span>
+</span>
+
+    </li>
+  <% } %>
+  </ul>
                   </form>
               </div>
               </div>
@@ -81,17 +97,6 @@
   <% } %>
   </ul>
 
-  <ul class="Actions">
-  <% for(var i=0; i< ActionsMin.length; i++) {%>
-    <li class="list-group-item">
 
-     <strong>  <span><%= ActionsMin[i].TeamName %></span> </strong>
-      <span>:</span>
-      <span><%= ActionsMin[i].Minutes %></span>
-</span>
-
-    </li>
-  <% } %>
-  </ul>
 </body>
 </html>
