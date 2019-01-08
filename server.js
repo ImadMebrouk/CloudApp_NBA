@@ -79,6 +79,27 @@ app.get("/classementJoueur", (req, res) => {
 });
 
 
+app.get("/classementEquipe", (req, res) => {
+    
+db.collection('Actions').mapReduce(
+    function () {
+        emit(this.TeamName,this.Points)
+    },
+    function (k, v) {
+    return Array.sum(v);
+
+    },
+    { out: { inline: 1 } },
+    function (err, result) {
+
+        if (result) {
+            res.render('classementEquipe.ejs', {Teams: result});
+        }
+    }
+);
+
+});
+
 
 /* Post */
 
