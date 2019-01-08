@@ -45,12 +45,11 @@
     <div class="form_main">
                 <h4 class="heading"><strong>NBA </strong> Search <span></span></h4>
                 <div class="form">
-                	<form action="/" method="POST">
-                    <input type="text"  placeholder="TeamName" value="" name="TeamName" class="txt">
+                	<form action=""/classementJoueur?PlayerName="PlayerName" method="GET">
+                    <input type="text"  placeholder="PlayerName" value="" name="PlayerName" class="txt">
                     <br>
                     <br>
-
-                    <input type="submit" value="submit" name="submit" class="txt2">
+                    <input type="submit" id="submit" class="txt2">
                 </form>
             </div>
             </div>
@@ -111,7 +110,7 @@
       <% for (var i = 0; i < Player.length; i++) { %>
        <tr>
          <td>
-           <%= Player[i].Pts %>
+         <%= Player[i].Pts %>
          </td>
          <td><%= Player[i].Assists %></td>
          <td><%= Player[i].Rebounds %></td>
