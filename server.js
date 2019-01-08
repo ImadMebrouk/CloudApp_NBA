@@ -39,7 +39,35 @@ app.get("/getMinutes", (req, res) => {
 
 app.get("/classementJoueur", (req, res) => {
 
+	if(req.query.PlayerName) // HELP OSSAMA
+ 	{
+		db.collection('Actions').aggregate([ { $match : {
 
+			"PlayerName":  req.query.PlayerName
+			 }},
+
+			{
+				$group : {
+					 _id :{id: "$Game.GameId" , game:"$Game"},
+					 Pts:{$sum:"$Points"},
+					 Rebounds:{$sum:"$TotalRebounds"},
+					 Assists:{$sum:"$Assists"}
+
+					 // ... rajouter toutes les autres stats
+				}
+			}
+
+		]).toArray((err, result) => {
+		if (err) return console.log(err)
+		result.SearchedPlayer = req.query.PlayerName;
+		res.render('classementJoueur.ejs', {Players: [],Player: result})
+		console.log(result);
+		});
+ 	}
+
+
+ 	else
+ 			{
     var query =
       {
         $group : {
@@ -55,13 +83,6 @@ app.get("/classementJoueur", (req, res) => {
          Pts:-1
       };
 
-
-
-
-		console.log(query)
-    //{"title" : {'$regex': title, '$options': 'i'}, "type" : {'$regex': type, '$options': 'i'},"authors" : {'$regex': author, '$options': 'i'}};
-
-
     db.collection('Actions').aggregate([{
         $group : {
            _id : "$PlayerName",
@@ -72,10 +93,11 @@ app.get("/classementJoueur", (req, res) => {
         }
       }]).sort(sort).toArray((err, result) => {
     if (err) return console.log(err)
-    res.render('classementJoueur.ejs', {Players: result})
+    res.render('classementJoueur.ejs', {Players: result, Player: []})
   console.log(result);
   });
 
+}
 });
 
 
@@ -136,11 +158,6 @@ app.post('/', (req, res) => {
 
 
     var query = {"TeamName" : teamName};
-
-
-		console.log(query)
-    //{"title" : {'$regex': title, '$options': 'i'}, "type" : {'$regex': type, '$options': 'i'},"authors" : {'$regex': author, '$options': 'i'}};
-
 
 db.collection('Actions').find(query).toArray((err, result) => {
     if (err) return console.log(err)

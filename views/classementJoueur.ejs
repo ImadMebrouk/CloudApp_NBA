@@ -71,6 +71,7 @@
         <div class="tab-content">
           <div class="tab-pane container active">
 
+<%if (Players.length > 0) { %>
 <table  id="compactTable" class="table">
 
   <thead class="thead-light">
@@ -83,7 +84,7 @@
    <% for (var i = 0; i < Players.length; i++) { %>
     <tr>
       <td>
-        <a href="<%="/Page=?"  + Players[i]._id %>">
+        <a href="<%="/classementJoueur?PlayerName=" + Players[i]._id %>">
           <%= Players[i]._id %>
         </a>
       </td>
@@ -93,6 +94,32 @@
    <% } %>
  </tbody>
 </table>
+   <% } %>
+
+
+   <%if (Player.length > 0) { %>
+   <table  id="compactTable" class="table">
+     <p> <strong>  <%= Player.SearchedPlayer%> Games : </strong> </p>
+
+     <thead class="thead-light">
+      <tr>
+         <th>Points</th><th>Assists</th><th>Rebonds</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% for (var i = 0; i < Player.length; i++) { %>
+       <tr>
+         <td>
+           <%= Player[i].Pts %>
+         </td>
+         <td><%= Player[i].Assists %></td>
+         <td><%= Player[i].Rebounds %></td>
+       </tr>
+      <% } %>
+    </tbody>
+   </table>
+      <% } %>
 
 </div>
 </div>
