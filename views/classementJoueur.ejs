@@ -82,7 +82,11 @@
    <tbody>
    <% for (var i = 0; i < Players.length; i++) { %>
     <tr>
-      <td><%= Players[i]._id %></td>
+      <td>
+        <a href="<%="/Page=?"  + Players[i]._id %>">
+          <%= Players[i]._id %>
+        </a>
+      </td>
       <td><%= Players[i].Pts %></td>
       <td><%= Players[i].Pts/Players[i].count %></td>
     </tr>
