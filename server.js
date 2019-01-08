@@ -80,7 +80,32 @@ app.get("/classementJoueur", (req, res) => {
 
 
 app.get("/classementEquipe", (req, res) => {
+
+   if(req.query.TeamName)
+    {
+        db.collection('Actions').aggregate([ { $match : { 
+          
+          "TeamName":  req.query.TeamName
+       }},
+       
+      {
+        $group : {
+           _id :{id: "$Game.GameId" , game:"$Game"},
+           Pts:{$sum:"$Points"}
+           // ... rajouter toutes les autres stats
+        }
+      }
+      
+   ]).toArray((err, result) => {
+    if (err) return console.log(err)
+    res.render('classementEquipe.ejs', {Teams: [],Team: result})
+  console.log(result);
+  });
+    }
     
+    
+    else
+        {
 db.collection('Actions').mapReduce(
     function () {
         emit(this.TeamName,this.Points)
@@ -93,11 +118,11 @@ db.collection('Actions').mapReduce(
     function (err, result) {
 
         if (result) {
-            res.render('classementEquipe.ejs', {Teams: result});
+            res.render('classementEquipe.ejs', {Teams: result, Team:[]});
         }
     }
 );
-
+        }
 });
 
 
@@ -110,7 +135,7 @@ app.post('/', (req, res) => {
 
 
     var query = {"TeamName" : teamName};
-
+    
 
 		console.log(query)
     //{"title" : {'$regex': title, '$options': 'i'}, "type" : {'$regex': type, '$options': 'i'},"authors" : {'$regex': author, '$options': 'i'}};
