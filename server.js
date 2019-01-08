@@ -38,9 +38,9 @@ app.get("/getMinutes", (req, res) => {
 });
 
 app.get("/classementJoueur", (req, res) => {
-    
 
-    var query =   
+
+    var query =
       {
         $group : {
            _id : "$PlayerName",
@@ -50,12 +50,12 @@ app.get("/classementJoueur", (req, res) => {
            // ... rajouter toutes les autres stats
         }
       };
-      
+
     var sort =   {
          Pts:-1
       };
-      
- 
+
+
 
 
 		console.log(query)
@@ -75,7 +75,7 @@ app.get("/classementJoueur", (req, res) => {
     res.render('classementJoueur.ejs', {Players: result})
   console.log(result);
   });
-    
+
 });
 
 
@@ -83,11 +83,11 @@ app.get("/classementEquipe", (req, res) => {
 
    if(req.query.TeamName)
     {
-        db.collection('Actions').aggregate([ { $match : { 
-          
+        db.collection('Actions').aggregate([ { $match : {
+
           "TeamName":  req.query.TeamName
        }},
-       
+
       {
         $group : {
            _id :{id: "$Game.GameId" , game:"$Game"},
@@ -95,15 +95,16 @@ app.get("/classementEquipe", (req, res) => {
            // ... rajouter toutes les autres stats
         }
       }
-      
+
    ]).toArray((err, result) => {
     if (err) return console.log(err)
+		result.SearchedTeamName = req.query.TeamName;
     res.render('classementEquipe.ejs', {Teams: [],Team: result})
   console.log(result);
   });
     }
-    
-    
+
+
     else
         {
 db.collection('Actions').mapReduce(
@@ -135,7 +136,7 @@ app.post('/', (req, res) => {
 
 
     var query = {"TeamName" : teamName};
-    
+
 
 		console.log(query)
     //{"title" : {'$regex': title, '$options': 'i'}, "type" : {'$regex': type, '$options': 'i'},"authors" : {'$regex': author, '$options': 'i'}};
@@ -151,9 +152,6 @@ db.collection('Actions').find(query).toArray((err, result) => {
   });
 
 });
-
-
-
 
 app.post('/getMinutes', (req, res) => {
   var teamName = req.body.TeamName;

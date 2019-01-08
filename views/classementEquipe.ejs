@@ -95,11 +95,11 @@
  </tbody>
 </table>
 <% } %>
-            
 
-<%if (Team.length > 0) { %>            
+
+<%if (Team.length > 0) { %>
 <table  id="compactTable" class="table">
-
+    <p> <strong>  <%= Team.SearchedTeamName %> Games : </strong> </p>
   <thead class="thead-light">
    <tr>
       <th>Game ID</th>
@@ -127,7 +127,7 @@
       <td><%= Team[i].Pts %></td>
       <% if(Team[i]._id.game.ResultOfTeam1 == 1){ %>
         <td>Yes</td>
-        <% } else{ %>  
+        <% } else{ %>
         <td>No</td>
         <% } %>
     </tr>
@@ -135,8 +135,8 @@
  </tbody>
 </table>
 <% } %>
-          
-              
+
+
 
 </div>
 </div>
@@ -148,4 +148,3 @@
 
 </body>
 </html>
-
