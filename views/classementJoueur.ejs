@@ -15,7 +15,7 @@
   <nav class="navbar navbar-default navbar-expand-lg" role="navigation">
 
 
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             <span> NBA - </span>
             NoSQL Application with NodeJS & MongoDB
         </a>
@@ -33,7 +33,17 @@
               <a class="nav-link" href="/classementEquipe">TeamClassement</a>
           </li>
         </ul>
-
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item">
+          <a class="nav-link" href="/">User</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/EquipeSaison">Analyst</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/Admin">Admin</a>
+        </li>
+    </ul>
 </nav>
 
 
@@ -43,6 +53,8 @@
 
     <div class="col-md-4">
     <div class="form_main">
+                <img src="/assets/NBA-logo.jpg">
+
                 <h4 class="heading"><strong>NBA </strong> Search <span></span></h4>
                 <div class="form">
                 	<form action=""/classementJoueur?PlayerName="PlayerName" method="GET">
@@ -70,30 +82,6 @@
         <div class="tab-content">
           <div class="tab-pane container active">
 
-<%if (Players.length > 0) { %>
-<table  id="compactTable" class="table">
-
-  <thead class="thead-light">
-   <tr>
-      <th>PlayerName</th><th>Points</th><th>Points/Game</th>
-   </tr>
-   </thead>
-
-   <tbody>
-   <% for (var i = 0; i < Players.length; i++) { %>
-    <tr>
-      <td>
-        <a href="<%="/classementJoueur?PlayerName=" + Players[i]._id %>">
-          <%= Players[i]._id %>
-        </a>
-      </td>
-      <td><%= Players[i].Pts %></td>
-      <td><%= Players[i].Pts/Players[i].count %></td>
-    </tr>
-   <% } %>
- </tbody>
-</table>
-   <% } %>
 
 
    <%if (Player.length > 0) { %>

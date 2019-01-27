@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,23 +15,24 @@
   <nav class="navbar navbar-default navbar-expand-lg" role="navigation">
 
 
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="#">
             <span> NBA - </span>
             NoSQL Application with NodeJS & MongoDB
         </a>
 
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-              <a class="nav-link" href="/">Home</a>
+              <a class="nav-link" href="/EquipeSaison">Team's Stats</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/classementJoueur">PlayerStats</a>
+              <a class="nav-link" href="/JoueurSaison">Player's Stats</a>
             </li>
 
-          <li class="nav-item">
-              <a class="nav-link" href="/classementEquipe">TeamClassement</a>
-          </li>
+             <li class="nav-item">
+              <a class="nav-link" href="/Mvp">Best Player</a>
+            </li>
+
         </ul>
     <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">
@@ -58,12 +58,11 @@
 
                 <h4 class="heading"><strong>NBA </strong> Search <span></span></h4>
                 <div class="form">
-                	<form action="/classementEquipe" method="GET">
+                	<form action=""/classementJoueur?PlayerName="TeamName" method="GET">
                     <input type="text"  placeholder="TeamName" value="" name="TeamName" class="txt">
                     <br>
                     <br>
-
-                    <input type="submit" value="submit" name="submit" class="txt2">
+                    <input type="submit" id="submit" class="txt2">
                 </form>
             </div>
             </div>
@@ -84,71 +83,23 @@
         <div class="tab-content">
           <div class="tab-pane container active">
 
-<%if (Teams.length > 0) { %>
-<table  id="compactTable" class="table">
-
-  <thead class="thead-light">
-   <tr>
-      <th>TeamName</th><th>Points</th><th>Points/Game</th>
-   </tr>
-   </thead>
-
-   <tbody>
-   <% for (var i = 0; i < Teams.length; i++) { %>
-    <tr>
-      <td >
-          <a href="<%="/classementEquipe?TeamName="  + Teams[i]._id %>">
-              <%= Teams[i]._id %>
-          </a>  </td>
-      <td><%= Teams[i].value %></td>
-      <td><%= Teams[i].value %></td>
-    </tr>
-   <% } %>
- </tbody>
-</table>
-<% } %>
 
 
-<%if (Team.length > 0) { %>
-<table  id="compactTable" class="table">
-    <p> <strong>  <%= Team.SearchedTeamName %> Games : </strong> </p>
-  <thead class="thead-light">
-   <tr>
-      <th>Game ID</th>
-      <th>TeamName 1 </th>
-      <th>TeamName 2</th>
-      <th>Date</th>
-      <th>Points</th>
-      <th>Win</th>
+   <%if (Team.length > 0) { %>
+   <table  id="compactTable" class="table">
+     <h2> <strong>Stats for <%= Team[0]._id.GameId%>: </strong> </h2>
+
+      <hr>
+       <% for (key in Team[0].value) { %>
+         <p class="rounded border border-secondary" ><%= key %> : <%= Team[0].value[key] %></p>
 
 
-   </tr>
-   </thead>
-
-   <tbody>
-   <% for (var i = 0; i < Team.length; i++) { %>
-    <tr>
-      <td >
-          <a href="<%= Team[i]._id.game.Url %>">
-              <%= Team[i]._id.game.GameId %>
-          </a>
-      </td>
-      <td><%= Team[i]._id.game.Team1Name %> </td>
-      <td><%= Team[i]._id.game.Team2Name %></td>
-      <td><%= Team[i]._id.game.Date %></td>
-      <td><%= Team[i].Pts %></td>
-      <% if(Team[i]._id.game.ResultOfTeam1 == 1){ %>
-        <td>Yes</td>
-        <% } else{ %>
-        <td>No</td>
-        <% } %>
-    </tr>
-   <% } %>
- </tbody>
-</table>
-<% } %>
+      <% } %>
+      </hr> 
 
 
+   </table>
+      <% } %>
 
 </div>
 </div>

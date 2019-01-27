@@ -12,26 +12,26 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-default navbar-expand-lg" role="navigation">
+   <nav class="navbar navbar-default navbar-expand-lg" role="navigation">
 
-        <a class="navbar-brand" href="/">
+
+        <a class="navbar-brand" href="#">
             <span> NBA - </span>
             NoSQL Application with NodeJS & MongoDB
         </a>
 
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            
             <li class="nav-item active">
-              <a class="nav-link" href="/">Home</a>
+              <a class="nav-link" href="/EquipeSaison">Team's Stats</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/classementJoueur">PlayerStats</a>
+              <a class="nav-link" href="/JoueurSaison">Player's Stats</a>
             </li>
-
-          <li class="nav-item">
-              <a class="nav-link" href="/classementEquipe">TeamClassement</a>
-          </li>
+             
+            <li class="nav-item">
+              <a class="nav-link" href="/Mvp">Best Player</a>
+            </li> 
         </ul>
     <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">
@@ -47,21 +47,21 @@
 </nav>
 
 
-<div class="container" >
-        
-  <div class="row" style="margin-left: auto;
-  margin-right: auto;">
+<div class="container">
+  <div class="row">
+
+
     <div class="col-md-4">
     <div class="form_main">
-        <img src="/assets/NBA-logo.jpg">
+                <img src="/assets/NBA-logo.jpg">
+
                 <h4 class="heading"><strong>NBA </strong> Search <span></span></h4>
                 <div class="form">
-                	<form action="/" method="POST">
-                    <input type="text"  placeholder="TeamName" value="" name="TeamName" class="txt">
+                	<form action=""/classementJoueur?PlayerName="PlayerName" method="GET">
+                    <input type="text"  placeholder="PlayerName" value="" name="PlayerName" class="txt">
                     <br>
                     <br>
-
-                    <input type="submit" value="submit" name="submit" class="txt2">
+                    <input type="submit" id="submit" class="txt2">
                 </form>
             </div>
             </div>
@@ -71,40 +71,42 @@
   </div>
 </div>
 
+
+
   <br>
   <br>
 
-        <%if (Actions.length > 0) { %>
-  <ul class="Actions">
-    <table  id="compactTable" class="table">
-
-      <thead class="thead-light">
-
-        <tr>
-           <th>Result</th>
-        </tr>
-        </thead>
-   <tbody>
-       
+  <div class="card">
+      <div class="card-body">
+                  <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane container active">
 
 
-  <% for(var i=0; i< Actions.length; i++) {%>
-    <li class="list-group-item">
+    <%if (Player.length > 0) { %>
+   <table  id="compactTable" class="table">
+     <h2> <strong><%= Player.SearchedPlayer%> Stats : </strong> </h2>
 
-     <strong>  <span><%= Actions[i].TeamName %></span> </strong>
-      <span>:</span>
-      <a href="<%= "/classementJoueur?PlayerName="  + Actions[i].PlayerName %>">
-          <%= Actions[i].PlayerName %></a>
-</span>
+      <hr>
+       <% for (key in Player[0]) { %>
+         <p class="rounded border border-secondary" ><%= key %> : <%= Player[0][key] %></p>
 
-    </li>
-  <% } %>
-      
-       <% } %>
-  </ul>
 
-</tbody>
-</table>
+      <% } %>
+      </hr> 
+
+
+   </table>
+      <% } %>
+            
+
+
+</div>
+</div>
+</div>
+</div>
+
+
 
 
 </body>
