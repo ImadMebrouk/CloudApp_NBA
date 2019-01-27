@@ -4,6 +4,16 @@ var assert = require('assert');
 
  let uri = 'mongodb://Admin:root95@ds137634.mlab.com:37634/nba';
 
+
+ // set up a command function
+ function getDbStats(db, callback) {
+   db.command({'top': 1}, function(err, results) {
+     console.log(results);
+     callback();
+   });
+ };
+
+
 // Database Name
 const dbName = 'nba';
 
@@ -32,7 +42,7 @@ var myrequest = {"TeamName" : "New York Knicks"}
 
   const db = client.db(dbName);
 
-  findDocuments(db, function() {
+ getDbStats(db, function() {
     client.close();
   });
 });

@@ -28,10 +28,10 @@
             <li class="nav-item">
               <a class="nav-link" href="/JoueurSaison">Player's Stats</a>
             </li>
-             
+
             <li class="nav-item">
               <a class="nav-link" href="/Mvp">Best Player</a>
-            </li> 
+            </li>
         </ul>
     <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">
@@ -58,7 +58,19 @@
                 <h4 class="heading"><strong>NBA </strong> Search <span></span></h4>
                 <div class="form">
                 	<form action=""/classementJoueur?PlayerName="PlayerName" method="GET">
-                    <input type="text"  placeholder="PlayerName" value="" name="PlayerName" class="txt">
+                    <select class="custom-select" name ="PlayerName">
+                      <option selected>Choose (few examples)...</option>
+                      <option value="Darren Collison">Darren Collison</option>
+                      <option value="Lebron James">Lebron James</option>
+                      <option value="JR Smith">JR Smith</option>
+                      <option value="Kyrie Irving">Kyrie Irving</option>
+                      <option value="Kevin Durant">Kevin Durant</option>
+                      <option value="Stephen Curry">Stephen Curry</option>
+                      <option value="Carmelo Anthony">Carmelo Anthony</option>
+                      <option value="Demar DeRozan">Demar DeRozan</option>
+                      <option value="Dirk Nowitzki">Dirk Nowitzki</option>
+                      <option value=""></option>
+                    </select>
                     <br>
                     <br>
                     <input type="submit" id="submit" class="txt2">
@@ -93,12 +105,12 @@
 
 
       <% } %>
-      </hr> 
+      </hr>
 
 
    </table>
       <% } %>
-            
+
 
 
 </div>

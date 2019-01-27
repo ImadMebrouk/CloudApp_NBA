@@ -59,7 +59,19 @@
                 <h4 class="heading"><strong>NBA </strong> Search <span></span></h4>
                 <div class="form">
                 	<form action=""/classementJoueur?PlayerName="TeamName" method="GET">
-                    <input type="text"  placeholder="TeamName" value="" name="TeamName" class="txt">
+                    <select class="custom-select" name ="TeamName">
+                      <option selected>Choose...</option>
+                      <option value="New York Knicks">New York Knicks</option>
+                      <option value="Los Angeles Lakers">Los Angeles Lakers</option>
+                      <option value="Houston Rockets">Houston Rockets</option>
+                      <option value="Atlanta Hawks">Atlanta Hawks</option>
+                      <option value="Boston Celtics">Boston Celtics</option>
+                      <option value="Brooklyn Nets">Brooklyn Nets</option>
+                      <option value="Charlotte Bobcats">Charlotte Bobcats</option>
+                      <option value="Chicago Bulls">Chicago Bulls</option>
+                      <option value="San Antonio Spurs">San Antonio Spurs</option>
+                      <option value="Washington Wizards">Washington Wizards</option>
+                    </select>
                     <br>
                     <br>
                     <input type="submit" id="submit" class="txt2">
@@ -89,13 +101,17 @@
    <table  id="compactTable" class="table">
      <h2> <strong>Stats for <%= Team[0]._id.GameId%>: </strong> </h2>
 
+    <tbody>
       <hr>
        <% for (key in Team[0].value) { %>
-         <p class="rounded border border-secondary" ><%= key %> : <%= Team[0].value[key] %></p>
+        <tr>
+            <td> <%= key %> </td>
+            <td> <%= Team[0].value[key] %> </td>
+         </tr>
 
 
       <% } %>
-      </hr> 
+      </hr>
 
 
    </table>
