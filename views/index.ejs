@@ -20,7 +20,7 @@
         </a>
 
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            
+
             <li class="nav-item active">
               <a class="nav-link" href="/">Home</a>
             </li>
@@ -48,63 +48,29 @@
 
 
 <div class="container" >
-        
+
   <div class="row" style="margin-left: auto;
   margin-right: auto;">
     <div class="col-md-4">
     <div class="form_main">
-        <img src="/assets/NBA-logo.jpg">
-                <h4 class="heading"><strong>NBA </strong> Search <span></span></h4>
-                <div class="form">
-                	<form action="/" method="POST">
-                    <input type="text"  placeholder="TeamName" value="" name="TeamName" class="txt">
-                    <br>
-                    <br>
 
-                    <input type="submit" value="submit" name="submit" class="txt2">
-                </form>
-            </div>
-            </div>
-      </div>
+                <h4 class="heading"><strong>NBA </strong> Search Engine <span></span></h4>
+
+    </div>
+  </div>
 
 
   </div>
+
+    <h3> Bonjour et bienvenue sur notre application de statistiques NBA</h3>
 </div>
 
-  <br>
-  <br>
-
-        <%if (Actions.length > 0) { %>
-  <ul class="Actions">
-    <table  id="compactTable" class="table">
-
-      <thead class="thead-light">
-
-        <tr>
-           <th>Result</th>
-        </tr>
-        </thead>
-   <tbody>
-       
+<br>
+<br>
 
 
-  <% for(var i=0; i< Actions.length; i++) {%>
-    <li class="list-group-item">
 
-     <strong>  <span><%= Actions[i].TeamName %></span> </strong>
-      <span>:</span>
-      <a href="<%= "/classementJoueur?PlayerName="  + Actions[i].PlayerName %>">
-          <%= Actions[i].PlayerName %></a>
-</span>
 
-    </li>
-  <% } %>
-      
-       <% } %>
-  </ul>
-
-</tbody>
-</table>
 
 
 </body>

@@ -33,7 +33,7 @@
               <a class="nav-link" href="/Mvp">Best Player</a>
             </li>
 
-            
+
         </ul>
     <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">
@@ -63,20 +63,25 @@
 
     <%if (Player.length > 0) { %>
    <table  id="compactTable" class="table">
-     <h2> <strong> The best player of this season is : <%= Player._id%> </strong> </h2>
+     <h2> <strong> The best player of this season is : <%= Player[0]._id%> </strong> </h2>
 
+     <tbody>
       <hr>
        <% for (key in Player[0]) { %>
-         <p class="rounded border border-secondary" ><%= key %> : <%= Player[0][key] %></p>
 
+         <tr>
+             <td> <strong> <%= key %> </strong> </td>
+             <td> <%= Player[0][key] %> </td>
+          </tr>
 
       <% } %>
-      </hr> 
+      </hr>
 
+    </tbody>
 
    </table>
       <% } %>
-            
+
 
 
 </div>

@@ -20,7 +20,7 @@
             NoSQL Application with NodeJS & MongoDB
         </a>
 
-        
+
     <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">
           <a class="nav-link" href="/">User</a>
@@ -50,15 +50,19 @@
    <table  id="compactTable" class="table">
      <h2> <strong>Server stats: </strong> </h2>
 
-      <hr>
-       <% for (key in Server) { %>
-         <p class="rounded border border-secondary" ><%= key +  " : " +  Server[key] %></p>
+      <tbody>
+       <hr>
+         <% for (key in Server) { %>
 
+          <tr>
+              <td> <strong> <%= key %> </strong> </td>
+              <td> <%= Server[key] %>%> </td>
+           </tr>
 
-      <% } %>
-      </hr> 
+       <% } %>
+       </hr>
 
-
+     </tbody>
    </table>
 
 </div>

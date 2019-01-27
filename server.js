@@ -24,18 +24,6 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.get("/", (req, res) => {
-    //res.sendFile(__dirname + "/index.html");
-    var result = []
-    res.render('index.ejs', {Actions: result})
-});
-
-
-app.get("/getMinutes", (req, res) => {
-    //res.sendFile(__dirname + "/index.html");
-    var result = []
-    res.render('index.ejs', {Actions: result})
-});
 
 app.get("/classementJoueur", (req, res) => {
 
@@ -153,15 +141,15 @@ db.collection('Actions').mapReduce(
 
 app.get("/JoueurSaison", (req, res) => {
 
-	if(req.query.PlayerName) 
+	if(req.query.PlayerName)
  	{
-		db.collection('Actions').aggregate([   
-      { $match : { 
+		db.collection('Actions').aggregate([
+      { $match : {
            "PlayerName":req.query.PlayerName
        }},
        {
         $group : {
-           _id : "$PlayerName", 
+           _id : "$PlayerName",
            Games: { $sum: 1 },
            Pts:{$sum:"$Points"},
            TotalRebounds:{ $sum: "$TotalRebounds" },
@@ -180,7 +168,7 @@ app.get("/JoueurSaison", (req, res) => {
         "BlockedShots Per Game": { "$divide": ["$TotalBlockedShots", "$Games"] },
 
     }}
-    
+
  ]).toArray((err, result) => {
 		if (err) return console.log(err)
 		result.SearchedPlayer = req.query.PlayerName;
@@ -216,7 +204,7 @@ app.get("/EquipeSaison", (req, res) => {
        emit(k,v);
     },
     function (key, values) {
-    reducedVal = { Points: 0, 
+    reducedVal = { Points: 0,
                    Actions: 0,
                    OffensiveRebounds:0,
                    DefensiveRebounds:0,
@@ -230,7 +218,7 @@ app.get("/EquipeSaison", (req, res) => {
      reducedVal.TotalRebounds += values[idx].TotalRebounds;
      reducedVal.BlockedShots += values[idx].BlockedShots;
      reducedVal.ThreePointMade += values[idx].ThreePointMade;
-     reducedVal.Actions += 1; 
+     reducedVal.Actions += 1;
     }
     reducedVal.PtsGame = reducedVal.Points /( reducedVal.Actions / 13 ) ;
     reducedVal.OffensiveReboundsGame = reducedVal.OffensiveRebounds /( reducedVal.Actions / 13 ) ;
@@ -271,11 +259,11 @@ app.get("/Admin", (req, res) => {
 
 app.get("/Mvp", (req, res) => {
 
-  
-db.collection('Actions').aggregate([   
+
+db.collection('Actions').aggregate([
        {
         $group : {
-           _id : "$PlayerName", 
+           _id : "$PlayerName",
            count: { $sum: 1 },
            Pts:{$sum:"$Points"},
            TotalRebounds:{ $sum: "$TotalRebounds" },
@@ -285,7 +273,7 @@ db.collection('Actions').aggregate([
         }
     },
      { "$addFields": {
-         
+
         "PtsGame": { "$divide": ["$Pts", "$count"] },
         "ReboundsGame": { "$divide": ["$TotalRebounds", "$count"] },
         "AssistsGame": { "$divide": ["$TotalAssists", "$count"] },
@@ -293,7 +281,7 @@ db.collection('Actions').aggregate([
         "BlockedShotsGame": { "$divide": ["$TotalBlockedShots", "$count"] },
     }},
     {"$addFields":{
-     "GlobalStats": { "$add": [ "$PtsGame", "$ReboundsGame", "$AssistsGame","$StealsGame","$ReboundsGame", "$BlockedShotsGame"] } 
+     "GlobalStats": { "$add": [ "$PtsGame", "$ReboundsGame", "$AssistsGame","$StealsGame","$ReboundsGame", "$BlockedShotsGame"] }
 
     }},
     {
@@ -302,56 +290,12 @@ db.collection('Actions').aggregate([
     {
         "$limit":1
         }
-    
+
  ]).toArray((err, result) => {
 		if (err) return console.log(err)
 		result.SearchedPlayer = req.query.PlayerName;
 		res.render('Mvp.ejs', {Player: result})
 		console.log(result);
 		});
-
-});
-
-/* Post */
-
-
-app.post('/', (req, res) => {
-  var teamName = req.body.TeamName;
-  var PlayerName = req.body.PlayerName;
-
-
-    var query = {"TeamName" : teamName};
-
-db.collection('Actions').find(query).toArray((err, result) => {
-    if (err) return console.log(err)
-    db.collection('Actions').find(query).count().then(numItems => {
-      console.log(numItems);
-    })
-    res.render('index.ejs', {Actions: result})
-  //console.log(result);
-  });
-
-});
-
-app.post('/getMinutes', (req, res) => {
-  var teamName = req.body.TeamName;
-  var minutes = req.body.Minutes;
-
-
-    var query = {"TeamName" : teamName};
-
-
-	console.log(query)
-    //{"title" : {'$regex': title, '$options': 'i'}, "type" : {'$regex': type, '$options': 'i'},"authors" : {'$regex': author, '$options': 'i'}};
-
-
-  db.collection('Actions').find(query).toArray((err, result) => {
-    if (err) return console.log(err)
-    db.collection('Actions').find(query).count().then(numItems => {
-      console.log(numItems);
-    })
-    res.render('index.ejs', {Actions: result})
-  //console.log(result);
-  });
 
 });

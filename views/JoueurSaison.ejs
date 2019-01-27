@@ -99,14 +99,19 @@
    <table  id="compactTable" class="table">
      <h2> <strong><%= Player.SearchedPlayer%> Stats : </strong> </h2>
 
+     <tbody>
       <hr>
        <% for (key in Player[0]) { %>
-         <p class="rounded border border-secondary" ><%= key %> : <%= Player[0][key] %></p>
 
+         <tr>
+             <td> <strong> <%= key %> </strong> </td>
+             <td> <%= Player[0][key] %> </td>
+          </tr>
 
       <% } %>
       </hr>
 
+    </tbody>
 
    </table>
       <% } %>
