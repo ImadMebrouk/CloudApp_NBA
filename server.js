@@ -87,6 +87,8 @@ app.get("/classementJoueur", (req, res) => {
         $group : {
            _id : "$PlayerName",
            Pts:{$sum:"$Points"},
+           Rebounds:{$sum:"$TotalRebounds"},
+           Assists:{$sum:"$Assists"},
            count: { $sum: 1 }
 
            // ... rajouter toutes les autres stats
